@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AvForm, AvGroup, AvInput, AvRadioGroup, AvRadio } from 'availity-reactstrap-validation';
 import { Button, Label, Input } from 'reactstrap';
 import { makeStyles } from '@material-ui/core/styles';
@@ -45,13 +45,17 @@ function Formulario() {
   const [flAdress, setFlAdress] = useState('');
   const [woAdress, setWoAdress] = useState('');
   const [city, setCity] = useState('');
-  const [nDocument, setNDocument] = useState('');
+  const [nDocument, setDocumentN] = useState('');
   const [country, setCountry] = useState('');
   const [way, setWay] = useState('');
   const [cif, setCif] = useState('');
-  const [tDocument, setTDocument] = useState('');
-  const [dni, setDni] = useState(false);
-  const [passport, setPassport] = useState(false);
+  const [typeDocument, setTypeDocument] = useState('');
+
+  
+  const [dni, setDni] = useState(true)
+  const [pasaporte, setPasaporte] = useState(false)
+  const [error2, setError2] = useState(false)
+
 
   // const [nif, setNif] = useState(false);
 
@@ -65,7 +69,7 @@ function Formulario() {
   const [formError7, setFormError7] = useState({});
   const [formError8, setFormError8] = useState({});
   const [formError9, setFormError9] = useState({});
-  const [formErrorDni, setErrorDni] = useState({});
+ 
 
 
   const classes = useStyles();
@@ -87,10 +91,6 @@ function Formulario() {
   const inputEmail = (e) => {
     setEmail(e.target.value);
     setFormError3({ ...formError3, email: false });
-  }
-  const inputNDocument = (e) => {
-    setNDocument(e.target.value);
-    setFormError4({ ...formError4, nDocument: false });
   }
   const inputNaAdress = (e) => {
     setNaAdress(e.target.value);
@@ -127,8 +127,8 @@ function Formulario() {
     if (activeStep === 2) {
       if (person === 'physical') {
         console.log('Name: ' + name + '\n', 'Last name: ' + lastName + '\n', 'Email: ' + email
-          + '\n', 'Document: ' + nDocument + '\n', 'Country: ' + country + '\n', 'City: ' + city + '\n', 'Adress: '
-          + way + ' ' + naAdress + ', ' + nuAdress + ', ' + flAdress + ', ' + woAdress);
+          + '\n', 'Country: ' + country + '\n', 'City: ' + city + '\n', 'Adress: '
+          + way + ' ' + naAdress + ', ' + nuAdress + ', ' + flAdress + ', ' + woAdress + '\n', typeDocument + ': ' + nDocument);
       } else if (person === 'legal') {
         console.log('Societys Name: ' + name + '\n', 'CIF: ' + cif + '\n', 'Email: ' + email + '\n', 'Country: '
           + country + '\n', 'City: ' + city + '\n', 'Adress: ' + way + ' ' + naAdress + ', ' + nuAdress + ', '
@@ -144,8 +144,8 @@ function Formulario() {
       setError(true);
     }
 
-    if (person === 'physical' && activeStep === 1 && name.length !== 0 && lastName.length !== 0 && email.length !== 0 && nDocument.length > 9
-      && naAdress.length !== 0 && nuAdress.length !== 0 && city.length !== 0 && country !== '') {
+    if (person === 'physical' && activeStep === 1 && name.length !== 0 && lastName.length !== 0 && email.length !== 0 
+      && naAdress.length !== 0 && nuAdress.length !== 0 && city.length !== 0 && country !== '' && nDocument.length !== 0) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
     } else if (activeStep === 1 && person === 'physical') {
@@ -157,9 +157,6 @@ function Formulario() {
       }
       if (email.length === 0) {
         setFormError3({ ...formError3, email: true });
-      }
-      if (nDocument.length < 9) {
-        setFormError4({ ...formError4, nDocument: true });
       }
       if (naAdress.length === 0) {
         setFormError5({ ...formError5, naAdress: true });
@@ -221,8 +218,6 @@ function Formulario() {
       }
     }
 
-
-
   };
 
   const handleBack = () => {
@@ -234,6 +229,52 @@ function Formulario() {
   //   setActiveStep(0);
   // };
 
+
+
+  function documentType(option) {
+    option = Number(option)
+    if (option === 1) {
+      console.log('entro al 1')
+      setDni(true)
+      setPasaporte(false)
+    } else if (option === 2) {
+      console.log('Al 2')
+      setDni(false)
+      setPasaporte(true)
+    }
+  }
+  function documentValidation(input) {
+    let error = false
+    // let errorMessage = ''
+    let regexDni = /^(\d{8})([A-Z])$/
+    let regexNie = /^[XYZ]\d{7,8}[A-Z]$/
+    let regexPasaporte = /^[a-z]{3}[0-9]{6}[a-z]?$/i
+    if (dni === true) {
+      if (!regexDni.test(input.trim()) && !regexNie.test(input.trim())) {
+        error = true
+        // errorMessage = 'El DNI / NIE que has introducido es incorrecto'
+      } else{
+        setDocumentN(input);
+      }
+      setTypeDocument("Dni");
+    } else if (pasaporte === true) {
+      if (!regexPasaporte.test(input.trim())) {
+        error = true
+        // errorMessage = 'El pasaporte que has introducido es incorrecto'
+      } else {
+        setDocumentN(input)
+      }
+      setTypeDocument("Pasaporte")
+    }
+    
+    error ? setError2(true) : setError2(false)
+    // console.log(error ? console.log(errorMessage) : 'Todo bien')
+  }
+
+  useEffect(() => {
+    // console.log(dni)
+    // console.log(pasaporte)
+  }, [dni, pasaporte, error])
 
   //Guardo toda la información para usarla abajo sin ocupar espacio
   const typeWay = [
@@ -255,13 +296,6 @@ function Formulario() {
     { value: "Portugal", option: "Portugal" },
     { value: "Inglaterra", option: "Inglaterra" },
   ]
-  const documentType = [
-    { value: "", option: "----" },
-    { value: "DNI", option: "DNI" },
-    { value: "NIE", option: "NIE" },
-    { value: "Passport", option: "Passport" },
-  ]
-
 
   return (
 
@@ -418,31 +452,28 @@ function Formulario() {
                         <p className="warning1">¿Dónde resides?</p>
                       )}
                     </AvGroup>
-                    {/* TIPO DE DOCUMENTO DE IDENTIDAD */}
+
+
+                    {/* DOCUMENTO */}
                     {person === "physical" &&
                       <div className="form-group col-5">
                         <Label>Tipo de documento</Label>
-                        <select className="form-control" value={tDocument} onChange={(event) => setTDocument(event.target.value)}>
-                          {documentType.map(opt3 => (
-                            <option value={opt3.value}>  {opt3.option} </option>
-                          ))}
-                        </select>
-                        {formErrorDni.nameS && (
-                          <p className="warning1">FALSO</p>
-                        )}
+                        <Input type="select" name="select" id="exampleSelect" onChange={(e) => { documentType(e.target.value) }} required>
+                          <option value="1" defaultValue>DNI / NIE</option>
+                          <option value="2">Pasaporte</option>
+                        </Input>
                       </div>
                     }
-                    {/* NUMERO DOCUMENTO */}
                     {person === "physical" &&
                       <AvGroup className="form-group col-12 col-md-7">
                         <Label for="nDocument">Número de documento</Label>
-                        <AvInput type="text" name="nDocument" className="form-control" id="nDocument" placeholder="Document"
-                          value={nDocument} onChange={(e) => inputNDocument(e)} />
-                        {formError4.nDocument && (
-                          <p className="warning1">Rellena tu documentación</p>
-                        )}
+                        <Input onChange={(e) => { documentValidation(e.target.value) }}  type="text" name="document" id="document"
+                          placeholder="Número identificación" required />
+                        {error2 ? <p className="warning1" style={{ color: 'rgb(255, 54, 54)', fontSize: '11px' }}>Error de validacion</p> : ''}
+
                       </AvGroup>
                     }
+
                     {/* CIF */}
                     {person === "legal" &&
                       <AvGroup className="form-group col-12 col-md-7">
