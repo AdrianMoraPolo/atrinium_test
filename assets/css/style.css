@@ -1,0 +1,333 @@
+/* RESET CSS */
+img {
+    width: 100%;
+    height: 100%;
+}
+.row{
+    margin: 0;
+}
+.fondo{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+body{
+    background-color: rgb(43, 52, 63);
+    color: white;
+}
+.imageAtm {
+    position: relative;
+    height: 200px;
+    background: url(/atriniumfondo.jpg);
+    background-size: cover;
+    
+}
+.logoAtri{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    width: 35%;
+}
+
+.container-form{
+    padding: 15px;
+    
+}
+.radiocenter{
+    margin: 0px 40px;
+}
+
+.radioform{
+    padding: 30px 30px 0px ;
+   
+}
+
+.radioform .form-control{
+    background-color:rgb(43, 52, 63);
+    color:white;
+  
+
+}
+
+.finalPage{
+   text-align: center;
+   padding-top: 100px;
+   padding-bottom: 100px;
+}
+
+.errorStep1{
+    color: rgb(255, 10, 72);
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 178px;
+
+}
+.warning1{
+    position: absolute;
+    color: rgb(255, 54, 54);
+    font-size: 0.7rem;
+}
+
+ /* BOTONES */
+
+ .button1{
+    border-radius: 20px;
+    border-width: 0px;
+    padding: 10px;
+    width: 50%;
+    background-image: linear-gradient(to right, #071463, #341771, #54197d, #731987, #92188f);
+    font-weight: bold;
+    color: white;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+    opacity: 1;
+    transition: opacity 0.1s;
+    -webkit-transition: opacity 0.1s;
+   
+}
+.button1:hover{
+    opacity: 0;
+    transition: opacity 0.2s;
+    -webkit-transition: opacity 0.2s;
+ 
+}
+.button2{
+    border-radius: 20px;
+    border-width: 0px;
+    padding: 10px;
+    width: 50%;
+    background-image: linear-gradient(to right, #0a1b8a, #431f92, #621e92, #881da0, #ad1cab);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+    font-weight: bold;
+    color: white;
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+    opacity: 1;
+}
+
+.backButton{
+    background-image: linear-gradient(to right, #071463, #341771, #54197d, #731987, #92188f);
+    color: white;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1), 0 6px 20px 0 rgba(0,0,0,0.05);
+    border-radius: 20px;
+    padding: 10px;
+    border-width: 0px;
+    width: 15%;
+    margin-left: 50px;
+}
+.opacityb{
+    position: relative;
+}
+.button1:focus {
+    outline: none;
+  }
+
+.button2:focus {
+    outline: none;
+  }
+
+/* #####################################
+########################################
+############# STEPPER ##################
+########################################
+########################################
+######################################## */
+
+
+
+.MuiPaper-root{
+    background-color: rgb(43, 52, 63) !important;
+    color: white !important;
+   
+}  
+.MuiStepLabel-label.MuiStepLabel-active {
+    color: rgba(255, 255, 255, 0.87) !important;
+    font-weight: 500;
+}
+.MuiStepLabel-label {
+    color: rgba(189, 189, 189, 0.87) !important;
+    font-weight: 500;
+}
+.MuiStepIcon-root.MuiStepIcon-completed {
+    color: #723fb5 !important;
+}
+.MuiStepIcon-root.MuiStepIcon-active {
+    color: #723fb5 !important;
+}
+.MuiStepper-root {
+    display: none !important;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: rgb(148, 34, 197);
+    background-color: rgb(148, 41, 194);
+  }
+
+
+/* #####################################
+########################################
+############ RESPONSIVE ################
+########################################
+########################################
+######################################## */
+
+
+@media (max-width: 767.98px) { 
+
+    p{
+        font-size: 0.8rem;
+    }
+    .h1{
+        font-size: 1.7rem !important;
+    }
+    Label{
+        font-size: 0.8rem;
+    }
+    .backButton{
+ 
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        margin-top: 70px;
+        opacity: 1 !important;
+        width: 25%;
+    }
+    .errorStep1{
+       
+        margin-left: 60px;
+        margin-top: 70px;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+
+    .errorStep1{
+       
+        margin-left: 138px;
+    
+    }
+    .container-form{
+        padding: 15px 90px;
+        
+    }
+    .h1{
+        font-size: 2.5em;
+    }
+    .p1{
+        margin-top: 30px;
+        font-size: 1.2em;
+    }
+
+    .radioform{
+        padding: 80px 40px 0px ;
+       
+    }
+
+    .radiocenter{
+        margin: 60px 110px;
+        
+
+    }
+
+    .backButton{
+ 
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        margin-top: 70px;
+        opacity: 1 !important;
+        width: 20%;
+    }
+
+    /*Personalización stepper*/
+
+    .MuiStepper-root {
+        display: flex !important;
+    }
+
+ 
+}
+
+
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .imageAtm {
+        height: 980px;
+     
+    }
+    .radioform{
+        padding: 150px 0px ;
+       
+    }
+
+   /*Personalización stepper*/
+
+   .MuiStepper-root {
+    display: flex !important;
+}
+
+}
+
+
+@media (min-width: 1200px) { 
+ 
+    .bigcontainer .col-12{
+    width: 70%;
+    }
+
+    .imageAtm {
+        height: 780px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    
+  
+    .radioform{
+        padding: 100px 0px ;
+        margin: 0 auto;
+             
+    }
+    
+    .radiocenter{
+     
+        margin: 0 auto;
+       
+
+    }
+
+    .opacityb{
+        position: relative;
+    }
+
+     /*Personalización stepper*/
+
+     .MuiStepper-root {
+        display: flex !important;
+    }
+
+    .fondo{
+        background-color: rgb(43, 52, 63);
+        margin-top: 50px;
+        margin-bottom: 50px;
+        border-radius: 10px;
+        padding-right: 0px !important; 
+        padding-left: 0px !important;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4), 0 6px 20px 0 rgba(0,0,0,0.3);
+
+    }
+
+    body{
+    background-color: rgb(26, 31, 37);
+    }
+   
+}
